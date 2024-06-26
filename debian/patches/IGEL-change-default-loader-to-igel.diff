@@ -1,0 +1,39 @@
+--- a/shim.h
++++ b/shim.h
+@@ -70,10 +70,10 @@
+ 
+ #ifdef __x86_64__
+ #ifndef DEFAULT_LOADER
+-#define DEFAULT_LOADER L"\\grubx64.efi"
++#define DEFAULT_LOADER L"\\igelx64.efi"
+ #endif
+ #ifndef DEFAULT_LOADER_CHAR
+-#define DEFAULT_LOADER_CHAR "\\grubx64.efi"
++#define DEFAULT_LOADER_CHAR "\\igelx64.efi"
+ #endif
+ #ifndef EFI_ARCH
+ #define EFI_ARCH L"x64"
+@@ -85,10 +85,10 @@
+ 
+ #if defined(__i686__) || defined(__i386__)
+ #ifndef DEFAULT_LOADER
+-#define DEFAULT_LOADER L"\\grubia32.efi"
++#define DEFAULT_LOADER L"\\igelia32.efi"
+ #endif
+ #ifndef DEFAULT_LOADER_CHAR
+-#define DEFAULT_LOADER_CHAR "\\grubia32.efi"
++#define DEFAULT_LOADER_CHAR "\\igelia32.efi"
+ #endif
+ #ifndef EFI_ARCH
+ #define EFI_ARCH L"ia32"
+--- a/Make.defaults
++++ b/Make.defaults
+@@ -28,7 +28,7 @@ DATATARGETDIR	?= $(datadir)/$(PKGNAME)/$
+ DEBUGINFO	?= $(prefix)/lib/debug/
+ DEBUGSOURCE	?= $(prefix)/src/debug/
+ OSLABEL		?= $(EFIDIR)
+-DEFAULT_LOADER	?= \\\\grub$(ARCH_SUFFIX).efi
++DEFAULT_LOADER	?= \\\\igel$(ARCH_SUFFIX).efi
+ DASHJ		?= -j$(shell echo $$(($$(grep -c "^model name" /proc/cpuinfo) + 1)))
+ 
+ ARCH		?= $(shell $(CC) -dumpmachine | cut -f1 -d- | sed s,i[3456789]86,ia32,)
