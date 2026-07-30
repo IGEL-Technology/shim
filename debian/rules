@@ -2,19 +2,8 @@
 
 include /usr/share/dpkg/architecture.mk
 
-# Other vendors, add your certs here.  No sense in using
-# dpkg-vendor --derives-from, because only Canonical-generated binaries will
-# be signed with this key; so if you are building your own shim binary you
-# should be building the other binaries also.
-ifeq ($(shell dpkg-vendor --is ubuntu && echo yes),yes)
-	cert=debian/canonical-uefi-ca.der
-	distributor=ubuntu
-COMMON_OPTIONS ?= ENABLE_SHIM_CERT=1 ENABLE_SBSIGN=1
-else
-	cert=debian/debian-uefi-ca.der
-	distributor=debian
-endif
-
+# Downstreams: add your own certs here. Only Debian binaries will be signed by this key.
+# You must generate and manage your own key if you (re)build shim, GRUB, or Linux.
 cert=debian/igel-uefi-ca.der
 distributor=igel
 
@@ -41,20 +30,24 @@ endif
 
 COMMON_OPTIONS += \
 	RELEASE=$(plain_upstream_version) \
-	COMMIT_ID=657b2483ca6e9fcf2ad8ac7ee577ff546d24c3aa \
+	COMMIT_ID=afc49558b34548644c1cd0ad1b6526a9470182ed \
 	MAKELEVEL=0 \
 	ENABLE_HTTPBOOT=true \
 	VENDOR_CERT_FILE=$(cert) \
 	VENDOR_DBX_FILE=$(DBX_LIST) \
 	EFIDIR=$(distributor) \
 	CROSS_COMPILE=$(DEB_HOST_GNU_TYPE)- \
-	CC=$(DEB_HOST_GNU_TYPE)-gcc-12 \
+	CC=gcc \
 	$(NULL)
 
 # Force shim to use the latest revocations by default to block some
 # older grub / peimage issues. This is:
-# "shim,4\ngrub,4\ngrub.peimage,2\n"
-COMMON_OPTIONS += SBAT_AUTOMATIC_DATE=2024010900
+# "shim,4\ngrub,5"
+COMMON_OPTIONS += SBAT_AUTOMATIC_DATE=2025021800
+
+# Enable NX for this build
+# COMMON_OPTIONS += "POST_PROCESS_PE_FLAGS=-n"
+# IGEL: We don't want NX until the whole boot stack is NX-capable
 
 $(DBX_LIST): $(DBX_HASHES)
 	./debian/generate_dbx_list $(EFI_ARCH) $< $@

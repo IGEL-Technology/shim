@@ -1,0 +1,15 @@
+--- a/shim.h
++++ b/shim.h
+@@ -101,10 +101,10 @@
+ 
+ #if defined(__aarch64__)
+ #ifndef DEFAULT_LOADER
+-#define DEFAULT_LOADER L"\\grubaa64.efi"
++#define DEFAULT_LOADER L"\\igelaa64.efi"
+ #endif
+ #ifndef DEFAULT_LOADER_CHAR
+-#define DEFAULT_LOADER_CHAR "\\grubaa64.efi"
++#define DEFAULT_LOADER_CHAR "\\igelaa64.efi"
+ #endif
+ #ifndef EFI_ARCH
+ #define EFI_ARCH L"aa64"

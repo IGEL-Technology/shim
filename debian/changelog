@@ -1,4 +1,65 @@
-shim (15.8-1) sid; urgency=medium
+shim (16.1-2) sid; urgency=medium
+
+  * Bump SBAT revocation level to 2025021800 aka
+    "shim,4\ngrub,5\n"
+    after discussion with shim reviewers team. Let's block the older
+    GRUB binaries which we know are problematic.
+  * Switch to using the default version of gcc. Closes: #1132054
+
+ -- Steve McIntyre <93sam@debian.org>  Fri, 03 Apr 2026 12:34:36 +0100
+
+shim (16.1-1) unstable; urgency=medium
+
+  * New upstream release: 16.1
+  * Switch to gcc-14
+  * Drop old patches, no longer needed
+    + 0001-sbat-Add-grub.peimage-2-to-latest-CVE-2024-2312.patch
+    + 0002-sbat-Also-bump-latest-for-grub-4-and-to-todays-date.patch
+  * Add new patch from upstream:
+    + 0001-Fix-build-with-binutils-2.46.patch. Closes: #1125741
+  * Add lintian overrides:
+    + Ignore included binaries for unit tests
+  * Bump SBAT revocation level to 2024040900 aka
+    "shim,4\ngrub,4\ngrub.peimage,2\n"
+  * Enable NX for the sid/forky build
+    + We should have a complete NX boot chain now...
+
+ -- Steve McIntyre <93sam@debian.org>  Mon, 23 Mar 2026 20:19:01 +0000
+
+shim (16.1~rc1-1) UNRELEASED; urgency=medium
+
+  * New upstream pre-release: 16.1-rc1
+
+ -- Steve McIntyre <93sam@debian.org>  Sun, 03 Aug 2025 21:31:59 +0100
+
+shim (16.0-1) UNRELEASED; urgency=medium
+
+  * New upstream release: 16.0
+
+ -- Steve McIntyre <93sam@debian.org>  Thu, 20 Mar 2025 23:58:03 +0000
+
+shim (16.0~rc1-1) UNRELEASED; urgency=medium
+
+  [ Steve McIntyre ]
+  * Remove Steve Langasek from Uploaders. RIP my good friend.
+
+  [ Mate Kukri ]
+  * Remove Ubuntu CA and dbx files from the repository
+
+  [ Niels Thykier ]
+  * Build without requiring root. Closes: #1089432, #1089433.
+
+  [ Steve McIntyre ]
+  * New upstream RC release: 16.0~rc1-1.
+    + Lots of bug fixes
+    + Disable local patches for now while testing
+  * Switch to using gcc-13 for builds. Closes: #1092205
+  * Also make the rules-requires-root changes in the templates for our
+    generated packages. Closes: #1092425
+
+ -- Steve McIntyre <93sam@debian.org>  Wed, 05 Mar 2025 23:36:15 +0000
+
+shim (15.8-1) unstable; urgency=medium
 
   [ Steve McIntyre ]
   * Cope with changes in pesign packaging. Closes: #1057606

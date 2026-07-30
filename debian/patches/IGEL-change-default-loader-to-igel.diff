@@ -1,6 +1,6 @@
 --- a/shim.h
 +++ b/shim.h
-@@ -70,10 +70,10 @@
+@@ -71,10 +71,10 @@
  
  #ifdef __x86_64__
  #ifndef DEFAULT_LOADER
@@ -13,7 +13,7 @@
  #endif
  #ifndef EFI_ARCH
  #define EFI_ARCH L"x64"
-@@ -85,10 +85,10 @@
+@@ -86,10 +86,10 @@
  
  #if defined(__i686__) || defined(__i386__)
  #ifndef DEFAULT_LOADER
@@ -28,7 +28,7 @@
  #define EFI_ARCH L"ia32"
 --- a/Make.defaults
 +++ b/Make.defaults
-@@ -28,7 +28,7 @@ DATATARGETDIR	?= $(datadir)/$(PKGNAME)/$
+@@ -28,7 +28,7 @@
  DEBUGINFO	?= $(prefix)/lib/debug/
  DEBUGSOURCE	?= $(prefix)/src/debug/
  OSLABEL		?= $(EFIDIR)
